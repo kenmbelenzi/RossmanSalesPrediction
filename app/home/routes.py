@@ -14,11 +14,10 @@ from app.home import blueprint
 import csv
 
 @blueprint.route('/index.html')
-@login_required
 def index():
     
-    if not current_user.is_authenticated:
-        return redirect(url_for('base_blueprint.login'))
+    #if not current_user.is_authenticated:
+     #   return redirect(url_for('base_blueprint.login'))
 
     return render_template('index.html')
 #    with open('data/pred.csv') as csv_file:
