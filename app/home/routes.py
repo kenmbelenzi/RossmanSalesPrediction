@@ -3,14 +3,17 @@
 License: MIT
 Copyright (c) 2019 - present AppSeed.us
 """
+import base64
+import io
 
-from app.home import blueprint
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, app
 from flask_login import login_required, current_user
-from app import login_manager
 from jinja2 import TemplateNotFound
 
-@blueprint.route('/index')
+from app.home import blueprint
+import csv
+
+@blueprint.route('/index.html')
 @login_required
 def index():
     
@@ -18,6 +21,22 @@ def index():
         return redirect(url_for('base_blueprint.login'))
 
     return render_template('index.html')
+#    with open('data/pred.csv') as csv_file:
+#        data = csv.DictReader(csv_file,delimiter=',')
+#        first_line = True
+#        stores = []
+#        totals = []
+#        for row in data:
+#            if not first_line:
+#                stores.append({
+#                    "Store": row['Store'],
+#                    "Sales": row['Sales'],
+#                })
+#                totals.append(float(row['Sales']))
+#            else:
+#                first_line = False
+
+#    return render_template("site_template/top-stats.html", stores=stores, totals=totals)
 
 @blueprint.route('/<template>')
 def route_template(template):
@@ -34,3 +53,5 @@ def route_template(template):
     
     except:
         return render_template('error-500.html'), 500
+
+

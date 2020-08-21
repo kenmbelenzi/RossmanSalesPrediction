@@ -1,4 +1,24 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>data</title>
+</head>
+<body>
+<h1>{{ totals| sum() / totals | count }}</h1>
+{% for store in stores %}
+    <h2>
+      {{ store.Store }}
+    </h2>
+    <p>
+      <b>Sales</b>: {{ store.Sales }}
+    </p>
 
+{% endfor %}
+
+</body>
+</html>
+-->
     <!-- Header -->
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
@@ -33,12 +53,9 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-
                       <h5 class="card-title text-uppercase text-muted mb-0">Average Sales</h5>
-                      <h1 class="">{{ totals| sum }}</h1>
-
+                      <span class="h2 font-weight-bold mb-0">{{ totals|sum() / totals|count }}</span>
                     </div>
-
                     <div class="col-auto">
                       <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
                         <i class="fas fa-users"></i>

@@ -11,6 +11,7 @@ from flask_login import (
     login_user,
     logout_user
 )
+import csv
 
 from app import db, login_manager
 from app.base import blueprint
@@ -113,3 +114,26 @@ def not_found_error(error):
 @blueprint.errorhandler(500)
 def internal_error(error):
     return render_template('errors/page_500.html'), 500
+
+
+@blueprint.route('/top-stats')
+@blueprint.route('/home/index')
+
+def stats():
+    with open('data/pred.csv') as csv_file:
+        data = csv.DictReader(csv_file, delimiter=',')
+        first_line = True
+        stores = []
+        totals = []
+        for row in data:
+            if not first_line:
+                stores.append({
+                    "Store": row['Store'],
+                    "Sales": row['Sales'],
+                })
+                totals.append(float(row['Sales']))
+            else:
+                first_line = False
+    # sums = format(sum(totals))
+
+    return render_template('site_template/top-stats.html', stores=stores, totals=totals)
